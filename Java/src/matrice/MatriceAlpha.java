@@ -67,7 +67,7 @@ public class MatriceAlpha {
             j = signal.getPositionSignal().getColonne();
 
             switch (signal.getOrientationSignal()){
-                case "A": while(this.getMatriceAlpha()[i][j] == null && (i >= 0) && (i <= 9)){
+                case "A": while(this.getMatriceAlpha()[i][j] == null && (i > 0) && (i < 9)){
                     i = i-signal.getDirectionSignal();
                 }
 
