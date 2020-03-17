@@ -17,14 +17,19 @@ public class ListSequence {
     }
 
     public void afficheResonnanceSequence(){
-        String messageRaisonnance = "";
-        Integer idSequence=1;
-        for (Sequence sequence: listSquence
+        for (Sequence sequence: this.listSquence
              ) {
-            messageRaisonnance += sequence.afficheRaisonnance();
+            System.out.println("Sequence #"+sequence.getIdSequence());
+             sequence.afficheRaisonnance();
         }
-        System.out.println("Sequence #"+idSequence);
-        System.out.println(messageRaisonnance);
+
+    }
+
+    public void afficheSignalSequence(){
+        for (Sequence sequence: this.listSquence
+             ) {
+            sequence.afficheSignalSequence();
+        }
     }
 
 

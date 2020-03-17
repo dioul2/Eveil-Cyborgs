@@ -11,20 +11,43 @@ public class Sequence {
     public Sequence(Integer idSequence){
         this.idSequence = idSequence;
     }
+    public Integer getIdSequence(){
+        return this.idSequence;
+    }
 
 
     public void addMiroir(Miroir miroir){
         this.raisonnance.add(miroir);
     }
 
-    public  String afficheRaisonnance(){
+    public void addSignal(Signal signal){
+        this.listSignal.add(signal);
+    }
+
+    public  void afficheRaisonnance(){
         String messageRaisonnace = "";
-        for (Miroir miroir: raisonnance
+        for (Miroir miroir: this.raisonnance
              ) {
-            messageRaisonnace += miroir.getOrientationMiroir()+"-";
+            messageRaisonnace += "-"+miroir.getOrientationMiroir();
 
         }
-        return messageRaisonnace;
+        if (messageRaisonnace.isEmpty()){
+            messageRaisonnace = " Aucune raisonnance";
+        }
+        String s =messageRaisonnace.substring(1);
+        System.out.println("Raisonnance: "+s);
+    }
+
+    public void afficheSignalSequence(){
+        String signalSequence = "";
+
+        for (Signal signal: this.listSignal
+        ) {
+            signalSequence +="/"+signal.getNumEmetteurRecpteurSignal()+""+signal.getOrientationSignal()+""+signal.getDirectionSignal()+""+signal.getOrdreLancement();
+        }
+        System.out.println(signalSequence);
     }
 
 }
+
+
