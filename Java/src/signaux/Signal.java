@@ -159,9 +159,9 @@ public class Signal implements Comparable<Signal> {
                 }
 
                 if ((j + this.getDirectionSignal()) < 0){
-                    i = 0;
+                    j = 0;
                 } else if((j + this.getDirectionSignal()) <= 9){
-                    j = i + this.getDirectionSignal();
+                    j = j + this.getDirectionSignal();
                 } else {
                     j = 9;
                 }
@@ -177,9 +177,9 @@ public class Signal implements Comparable<Signal> {
                 }
 
                 if ((j + this.getDirectionSignal()) < 0){
-                    i = 0;
+                    j = 0;
                 } else if((j + this.getDirectionSignal()) <= 9){
-                    j = i + this.getDirectionSignal();
+                    j = j + this.getDirectionSignal();
                 } else {
                     j = 9;
                 }
