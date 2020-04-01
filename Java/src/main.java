@@ -3,53 +3,34 @@ import signaux.Signal;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
+/**
+ * The type Main.
+ */
 public class main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
-        /*MatriceAlpha matrice=new MatriceAlpha();
-        matrice.afficheMatrice();
-        matrice.avancerSignal();
-        matrice.getListSequence().afficheResonnanceSequence();
-        matrice.afficheMesureEntre();
-        matrice.afficheMesureSortie();*/
+
         String sequence = "3A-1/7A-1/32N+1/5SAD+2/32N+2/35N+2/7A-3/37N+3/34SAD+4";
         String miroirFile = "/home/dioulde/IdeaProjects/Eveil-Cyborgs/Java/src/omega_miroir.txt";
         String mesureFile = "/home/dioulde/IdeaProjects/Eveil-Cyborgs/Java/src/omega_mesure.txt";
 
+        Matrice matrice = FactoryMatrice.getMatrice(6);
+        matrice.lance();
+
+        /*ArrayList<String> signauxDeSortiePossibleList0_9 = new ArrayList<>();
+        signauxDeSortiePossibleList0_9.add("A+");
+        signauxDeSortiePossibleList0_9.add("SAT+");
+        signauxDeSortiePossibleList0_9.add("SAD-");
+        System.out.println(signauxDeSortiePossibleList0_9.contains("A+"));*/
 
 
-         MatriceAlpha matriceAlpha = new MatriceAlpha(miroirFile, mesureFile);
-        /*matriceAlpha.afficheMatrice();
-        matriceAlpha.avancerSignalProtocol4();
-        matriceAlpha.getListSequence().afficheResonnanceSequence();
-        matriceAlpha.afficheMesureEntre();
-        matriceAlpha.afficheMesureSortie();*/
-
-        /*MatriceOmega matriceA= new MatriceOmega();
-        matriceA.afficheMatrice();
-        matriceA.avancerSignal();
-        matriceA.getListSequence().afficheResonnanceSequence();
-        matriceA.afficheMesureEntre();
-        matriceA.afficheMesureSortie();*/
-
-        Matrice matriceAphaProtocol1 = FactoryMatrice.getMatrice(1);
-        matriceAphaProtocol1.lance();
-        Matrice matriceAlphaProtocol2 = FactoryMatrice.getMatrice(2);
-        matriceAlphaProtocol2.lance();
-        Matrice matriceAlphaProtocol3 = FactoryMatrice.getMatrice(3);
-        matriceAlphaProtocol3.lance();
-        Matrice matriceAlphaProtocol4 = FactoryMatrice.getMatrice(4);
-        matriceAlphaProtocol4.lance();
-        Matrice matriceProtoProtocol5 = FactoryMatrice.getMatrice(5);
-        matriceProtoProtocol5.lance();
-
-        /*MatriceAlpha matriceAlpha1 = new MatriceAlpha(3);
-        matriceAlpha1.afficheMatrice();
-        matriceAlpha1.avancerSignalProtol3();
-        matriceAlpha1.getListSequence().afficheResonnanceSequence();
-        matriceAlpha1.getListSequence().afficheSignalSequence();
-        matriceAlpha1.afficheMesureEntre();
-        matriceAlpha1.afficheMesureSortie();*/
 
 
     }

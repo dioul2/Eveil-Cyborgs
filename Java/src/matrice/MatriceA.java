@@ -6,25 +6,39 @@ import signaux.Sequence;
 import signaux.Signal;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+/***
+ * Classe qui permet de créer les matrices des protocoles 1, 2, 3 et 4.
+ * @author dioulde
+ * @author victor
+ * @author lucas
+ */
 
 public class MatriceA extends Matrice {
-    Integer idProtocol;
 
+
+    /**
+     * Permet de creer une matrice en fonction de l'id du protocol
+     * @param idprotocol id du protocol courant
+     * @exception RuntimeException lance unec exception si l'idProtocol n'est pas compris entre 0 à 8.
+     */
     public MatriceA(Integer idprotocol) {
+           if(idprotocol < 0 || idprotocol > 8){
+               throw new RuntimeException("L'id du protocol doit etre compris entre 1 et 8");
+           }
         this.setIdProtocol(idprotocol);
         this.initialiseMatriceAvecMiroir(this.listMiroir);
+
     }
 
 
-
-    private Integer getIdProtocol() {
-        return idProtocol;
-    }
-
-    private void setIdProtocol(Integer idProtocol) {
-        this.idProtocol = idProtocol;
-    }
-
+    /**
+     * Initialise la matriceAlphaProtocol1 c'est à dire en ajoutant les miroirs correspondants et mettant null aux
+     * autres cases de la matrice mais aussi en lançant les signaux dans la matrice c'est à dire remplir la mesure
+     * d'entree mais aussi la listSignauxEncoursDeTraitement.
+     * @param listMiroir list miroirs à ajouter.
+     */
     public void initialiseMatriceAlphaProtocol1(ArrayList<Miroir> listMiroir) {
         this.nettoyer();
 
@@ -56,6 +70,14 @@ public class MatriceA extends Matrice {
         this.listSignauxEncourDeTraitement.add(new Signal(35,"N", 1));
         this.listSignauxEncourDeTraitement.add(new Signal(37,"N", 1));
     }
+
+
+    /**
+     * Initialise la matriceAlphaProtocol2 c'est à dire en ajoutant les miroirs correspondants et mettant null aux
+     * autres cases de la matrice mais aussi en lançant les signaux dans la matrice c'est à dire remplir la museure
+     *      * de sortie mais aussi la listSeSignauxEncoursDeTraitement.
+     * @param listMiroir list miroirs à ajouter.
+     */
     private void initialiseMatriceAlphaProtocol2(ArrayList<Miroir> listMiroir){
         this.nettoyer();
 
@@ -116,6 +138,12 @@ public class MatriceA extends Matrice {
 
     }
 
+    /**
+     * Initialise la matriceAlphaProtocol3 c'est à dire en ajoutant les miroirs correspondants et mettant null aux
+     * autres cases de la matrice mais aussi en lançant les signaux dans la matrice c'est à dire remplir la museure
+     *      * de sortie mais aussi la listSeSignauxEncoursDeTraitement.
+     * @param listMiroir list miroirs à ajouter.
+     */
     private void initialiseMatriceAlphaProtocol3(ArrayList<Miroir> listMiroir){
         this.nettoyer();
         Miroir miroir1 = new Miroir(new Position(0, 1), "SAT");
@@ -161,6 +189,10 @@ public class MatriceA extends Matrice {
 
     }
 
+    /**
+     * Permet de faire avancer chaque signal des protocoles 1 et 2 selon son orientation et sa direction  jusqu'à ce
+     * qu'il frappe un miroir ou il sort de la matrice.
+     */
     public void avancerSignalProtocol1_2() {
         Integer i = 0;
         Integer j = 0;
@@ -226,7 +258,7 @@ public class MatriceA extends Matrice {
             }
 
             this.listSequence.addSequence(sequenceEnCours);
-
+            Collections.sort(mesureSortie);
             for (Signal signal : mesureSortie
             ) {
                 listSignauxEncourDeTraitement.remove(signal);
@@ -235,6 +267,15 @@ public class MatriceA extends Matrice {
         }
     }
 
+    /**
+     * Permet de faire avancer chaque signal du protocolse 3 en mode asynchrone selon son orientation sa direction
+     * mais aussi son ordre de lancement jusqu'à ce qu'il frappe un miroir ou il sort de la matrice.
+     * Pour cela à chaque itération on deplacera que les signaux de listSignauxEncourTraitement qui ont l'odre de
+     * lancement correspondant a la sequence.
+     * Par expemple si on a les signaux "3A-1/7A-1/5SAD+2/35N+2/37N+3/34SAD+4" on traitera d'abord les signaux 3A-1/7A-1
+     * s'ils sorte de la matrice à cette sequence tant mieux sinon on changera leur ordre de lancement pour qu'on puisse
+     * les déplacer lors de la prochaines sequence.
+     */
     public void avancerSignalProtocol3(){
         Integer i = 0;
         Integer j = 0;
@@ -325,6 +366,16 @@ public class MatriceA extends Matrice {
         }
     }
 
+    /**
+     * Permet de faire avancer chaque signal du protocolse 4 en mode asynchrone comme dans le protocol3 selon son
+     * orientation sa direction mais aussi son ordre de lancement jusqu'à ce qu'il frappe un miroir ayant un effet de
+     * raisonnance à "true" ou il sort de la matrice.
+     * Dans ce protocol chaque miroir a un attribut boolean effetRaisonnance qui determine si le miroir va
+     *  déclencher l'effet de raisonnace ou pas pour cela au debut on l'initialise à true pour tout les miroirs et
+     *  à chaque fois qu'un signal va frapper un miroir on met l'effetRaisonnance à false pour desactiver son effet de
+     *  raisonnance comme ça les signaux qui viendront après lors de cette sequence vont traverser le miroir sans qu'il
+     *  n'y ai de changement de direction donc un miroir avec un effetRaisonncance = false equivaut à un miroir null.
+     */
     public void avancerSignalProtocol4(){
         Integer i = 0;
         Integer j = 0;
@@ -417,6 +468,12 @@ public class MatriceA extends Matrice {
     }
 
 
+    /**
+     * Permet d'initialiser la matrice avec la bonne methode en fonction de l'id du protocol
+     * c'est à dire: si l'idProtocol = 1  on appelle la methode initialiseMatriceAlphaProtocol1().
+     *               si l'idProtocol = 1  on appelle la methode initialiseMatriceAlphaProtocol2().
+     *               si l'idProtocol = 3 ou 4  on appelle la methode initialiseMatriceAlphaProtocol3().
+     */
     @Override
     protected void initialiseMatriceAvecMiroir(ArrayList<Miroir> listMiroir) {
         if(this.getIdProtocol() <=1) {
@@ -429,6 +486,12 @@ public class MatriceA extends Matrice {
 
     }
 
+    /**
+     * Permet de lancer la bonne methode AvancerSignal() en fonction de l'id du protocol
+     * c'est à dire: si l'idProtocol = 1 ou 2  on appelle la methode avancerSgnalProtocol1_2().
+     *               si l'idProtocol = 3  on appelle la methode avancerSgnalProtocol3().
+     *               si l'idProtocol = 4 on appelle la methode avancerSgnalProtocol4().
+     */
     @Override
     public void avancerSignal() {
         if(this.getIdProtocol() <= 2){
