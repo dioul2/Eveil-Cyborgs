@@ -322,7 +322,7 @@ public abstract class Matrice {
 
     /**
      * Permet de lancer le programme dans le main c'est à dire appeler les methodes  afficheMatrice(), avancerSignal(),
-     * afficheResonnanceSequence(), afficheMesureEntre(), afficheMesureSortie().
+     *  afficheResonnanceSequence(), afficheMesureEntre(), afficheMesureSortie()
      */
     public final void lance() {
         try {
