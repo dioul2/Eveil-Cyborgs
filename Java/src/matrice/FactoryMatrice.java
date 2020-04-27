@@ -11,23 +11,29 @@ import java.io.IOException;
  * @author victor
  * @author lucas
  */
-public class FactoryMatrice {
+public final class FactoryMatrice {
 
     /**
      * Retourne la matrice créer en fonction de l'idProtocol.
+     *
      * @param idprotocole idProtocol.
      * @return retourne une matrice remplis avec ces miroirs....
      * @throws IOException Lance une exception lors de la lecture ou l'écriture des données  dans les fichiers
-     * miroirFile.txt ou mesureFile.txt.
+     *                     miroirFile.txt ou mesureFile.txt.
      */
     public static Matrice getMatrice(Integer idprotocole) throws IOException {
-        Matrice matrice = null;
-        if(idprotocole <= 4) {
-            matrice = new MatriceA(idprotocole);
-        } else {
-            matrice = new MatriceOmega(idprotocole);
+        try {
+            Matrice matrice = null;
+            if (idprotocole <= 4) {
+                matrice = new MatriceAlpha(idprotocole);
+            } else {
+                matrice = new MatriceOmega(idprotocole);
+            }
+            return matrice;
+        } catch (SecurityException e) {
+            e.getMessage();
+            return null;
         }
-        return matrice;
     }
 
 }

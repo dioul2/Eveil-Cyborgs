@@ -7,22 +7,24 @@ package signaux;
  * @author lucas
  */
 
-public class Position {
+public final class Position {
     private Integer ligne;
     private Integer colonne;
 
     /**
      * Construit la position d'une case  de la matrice
-     * @param ligne ligne de la matrice
+     *
+     * @param ligne   ligne de la matrice
      * @param colonne colonne de la matrice
      */
-    public Position(Integer ligne, Integer colonne){
-        this.ligne=ligne;
-        this.colonne=colonne;
+    public Position(Integer ligne, Integer colonne) {
+        this.ligne = ligne;
+        this.colonne = colonne;
     }
 
     /**
      * Retourne  la ligne de la position
+     *
      * @return
      */
     public Integer getLigne() {
@@ -31,6 +33,7 @@ public class Position {
 
     /**
      * Permet de modifier la ligne de la position
+     *
      * @param ligne ligne
      */
     public void setLigne(Integer ligne) {
@@ -39,6 +42,7 @@ public class Position {
 
     /**
      * Retourne la  colonne de la position
+     *
      * @return
      */
     public Integer getColonne() {
