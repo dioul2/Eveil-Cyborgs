@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /***
  * Classe qui permet de créer les matrices des protocoles 5, 6, 7 et X.
@@ -547,6 +548,7 @@ final class MatriceOmega extends Matrice {
     @Override
     protected void avancerSignal() {
         try {
+            Collections.sort(mesureSortie);
             if (idProtocol == 7) {
                 this.avancerSignalProtocol7();
             } else {

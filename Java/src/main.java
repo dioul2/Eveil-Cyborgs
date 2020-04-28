@@ -18,8 +18,7 @@ public class main {
      */
     public static void main(String[] args) throws IOException {
 
-
-        Matrice matrice = FactoryMatrice.getMatrice(1);
+        Matrice matrice = FactoryMatrice.getMatrice(8);
         matrice.lance();
 
     }

@@ -272,14 +272,14 @@ final class MatriceAlpha extends Matrice {
                             }
                         }
                         signal.setPositionSignal(new Position(i, j));
-                        mesureSortie.add(signal);
+                        this.mesureSortie.add(signal);
 
                     }
                 }
 
                 this.listSequence.addSequence(sequenceEnCours);
-                Collections.sort(mesureSortie);
-                for (Signal signal : mesureSortie
+                Collections.sort(this.mesureSortie);
+                for (Signal signal : this.mesureSortie
                 ) {
                     listSignauxEncourDeTraitement.remove(signal);
 
@@ -370,7 +370,7 @@ final class MatriceAlpha extends Matrice {
                     }
                 }
                 this.listSequence.addSequence(sequenceEnCours);
-
+                Collections.sort(mesureSortie);
                 for (Signal signal : mesureSortie
                 ) {
                     listSignauxEncourDeTraitement.remove(signal);
@@ -475,7 +475,7 @@ final class MatriceAlpha extends Matrice {
                     }
                 }
                 this.listSequence.addSequence(sequenceEnCours);
-
+                Collections.sort(mesureSortie);
                 for (Signal signal : mesureSortie
                 ) {
                     listSignauxEncourDeTraitement.remove(signal);
@@ -530,6 +530,7 @@ final class MatriceAlpha extends Matrice {
     @Override
     protected void avancerSignal() {
         try {
+            Collections.sort(mesureSortie);
             if (this.getIdProtocol() <= 2) {
                 this.avancerSignalProtocol1_2();
             } else if (this.getIdProtocol() <= 3) {

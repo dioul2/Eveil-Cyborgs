@@ -103,11 +103,18 @@ public abstract class Matrice {
      */
     protected final void afficheMesureSortie() {
         try {
-            Collections.sort(mesureSortie);
+
+            Collections.sort(this.mesureSortie);
             String mesureS = "";
+
+            for (Signal signal: this.mesureSortie
+                 ) {
+                signal.setNumEmetteurRecpteurSignal();
+            }
+            Collections.sort(this.mesureSortie);
             for (Signal signal : this.mesureSortie
             ) {
-                signal.setNumEmetteurRecpteurSignal();
+                //signal.setNumEmetteurRecpteurSignal();
                 String directionSignal = "";
                 if (signal.getDirectionSignal() < 0) {
                     directionSignal = "-";
